@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Rice</title>
+    <link rel="stylesheet" href="/static/style-mobile.css">
+    <link rel="shortcut icon" href="/static/images/logo-alien.png" type="image/x-icon">
+    <script>
+        // Redirection script for mobile devices
+        if (window.matchMedia("only screen and (min-width: 601px)").matches) {
+            // window.location.href = 'index.html';
+            window.location.href = '/';
+        }
+    </script>
+    <script defer src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://unpkg.com/heic2any"></script>
+    <script defer src="/static/function.js"></script>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <a href="#" class="logo"><img src="/static/svg/DR 1.svg" alt="Dr. Logo"></a>
+            <ul class="menu-nav" id="menu-nav">
+                <li class="menu-item" style="--order: 1;">
+                    <a href="#home" class="menu-text present" id="home-text">Home</a>
+                </li>
+                <li class="menu-item" style="--order: 2;">
+                    <a href="#about" class="menu-text">About</a>
+                </li>
+                <li class="menu-item" style="--order: 3;">
+                    <a href="#detect" class="menu-text">Detect</a>
+                </li>
+                <li class="menu-item" style="--order: 4;">
+                    <a href="#disease" class="menu-text">Diseases</a>
+                </li>
+                <li class="menu-item" style="--order: 5;">
+                    <a href="#team" class="menu-text">Team</a>
+                </li>
+            </ul>
+            <ul class="contacts">
+                <li class="email"><img src="/static/svg/email.svg" alt="email">drricecompany@gmail.com</li>
+                <li class="telephone"><img src="/static/svg/telephone.svg" alt="telephone">+11 (000) 111-11-11</li>
+            </ul>
+            <div class="hamburger-menu">
+                <button class="hamburger" id="hamburger" type="button">
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="s-1" id="home">
+            <div class="s-container">
+                <article class="main-contents">
+                    <h4 class="welcome hidden" style="--order: 1;">welcome to dr. rice</h4>
+                    <h1 class="hero-title hidden" style="--order: 2;">Rice Disease Detection System</h1>
+                    <img class="wheat hidden" src="/static/svg/wheat-mobile.svg" alt="wheat" style="--order: 2;">
+                    <p class="hero-quote hidden" style="--order: 3;">Having problems with rice disease but don't know
+                        what disease it is? Don't worry, Dr.Rice got you covered with its Rice Disease Detection to help
+                        you maintain your rice healthy to keep your income wealthy.</p>
+                    <button class="proceed-btn hidden" id="button-p" type="button" style="--order: 4;">Proceed</button>
+                </article>
+            </div>
+        </section>
+        <section class="about" id="about">
+            <section class="s-2">
+                <div class="s-container">
+                    <article class="sec-contents" style="--order: 1;">
+                        <h2 class="sec-contents-title">What is Dr.Rice?<img src="/static/svg/multi-triangle-fright.svg"
+                                alt="🔺"></h2>
+                        <p>Dr.Rice is your digital plant pathologist! Our innovative web application allows you to
+                            upload images of rice leaves and uses advanced AI technology that was trained on 1400 images
+                            and tested on 350 images with an impressive accuracy of <span>96%</span> to precisely
+                            diagnose whether your rice plant is healthy or suffering from a disease. <br><br>Dr.Rice
+                            will not only identify it but also provide information about the type of disease affecting
+                            your crop. With Dr.Rice, safeguarding your rice plants' health is just a click away!</p>
+                        <p></p>
+                    </article>
+                </div>
+            </section>
+            <section class="s-2">
+                <div class="s-container">
+                    <article class="sec-contents" style="--order: 1;">
+                        <h2 class="sec-contents-title">How to Use Dr.Rice? <img
+                                src="/static/svg/multi-triangle-fright.svg" alt="🔺">
+                        </h2>
+                        <p>Embark on your journey with Dr.Rice in just a few simple steps! First, prepare a clear photo
+                            of your rice leaf - you can either take a fresh snap or use an existing image. Navigate to
+                            the 'Detect' section on our website and upload your image. Our advanced AI will then analyze
+                            the image and provide you with results. <br><br> Don't have a photo at hand? No worries!
+                            We've got you covered. Click [<a class="click-here"
+                                href="/static/download/Factsheet_false-smut-002.jpg" download>here</a>] to download a
+                            sample image and experience the power of Dr.Rice firsthand!</p>
+                    </article>
+                </div>
+            </section>
+        </section>
+        <section class="s-3" id="detect">
+            <div class="s-container">
+                <form class="form-container" method="post" action="/predict" enctype="multipart/form-data">
+                    <div class="img-container" width="224" height="224"><img src="/static/svg/no image.svg"
+                            alt="🌿"></img></div>
+                    <label class="label-for-upload-image" for="upload"><img src="/static/svg/upload-window.svg"
+                            alt="📤">Upload Image</label>
+                    <div class="upload-choice">
+                        <input class="upload-image" type="file" accept="image/jpeg, image/png" name="image-file"
+                            id="upload">
+                    </div>
+                    <div class="btns">
+                        <button class="reset" type="button">Reset</button>
+                        <button class="submit" type="submit">Submit</button>
+                    </div>
+                    <h3 class="title-output">Output Disease Name</h3>
+                    <div class="output" name="class-output"></div>
+                    <div id="wifi-loader">
+                        <svg class="circle-outer" viewBox="0 0 86 86">
+                            <circle class="back" cx="43" cy="43" r="40"></circle>
+                            <circle class="front" cx="43" cy="43" r="40"></circle>
+                            <circle class="new" cx="43" cy="43" r="40"></circle>
+                        </svg>
+                        <svg class="circle-middle" viewBox="0 0 60 60">
+                            <circle class="back" cx="30" cy="30" r="27"></circle>
+                            <circle class="front" cx="30" cy="30" r="27"></circle>
+                        </svg>
+                        <svg class="circle-inner" viewBox="0 0 34 34">
+                            <circle class="back" cx="17" cy="17" r="14"></circle>
+                            <circle class="front" cx="17" cy="17" r="14"></circle>
+                        </svg>
+                        <div class="text" data-text="starting"></div>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+    <section class="disease-page" id="disease">
+        <section class="sec-hr disease-bg" id="healthy-rice">
+            <div class="s-container sd-content">
+                <div class="arrow-container">
+                    <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36"
+                        fill="none">
+                        <path
+                            d="M18 32.2846C25.9528 32.2846 32.4 25.8376 32.4 17.8846C32.4 9.93172 25.9528 3.48462 18 3.48462C10.0471 3.48462 3.59998 9.93172 3.59998 17.8846C3.59998 25.8376 10.0471 32.2846 18 32.2846Z"
+                            stroke="#F7C35F" stroke-width="3.84" stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                            d="M12.24 19.9583L16.3728 15.552C16.578 15.3239 16.829 15.1415 17.1094 15.0167C17.3896 14.8918 17.6931 14.8271 18 14.8271C18.3069 14.8271 18.6104 14.8918 18.8906 15.0167C19.171 15.1415 19.422 15.3239 19.6272 15.552L23.76 19.9583"
+                            stroke="#F7C35F" stroke-width="3.84" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <article class="disease-content">
+                    <h2>Healthy Rice</h2>
+                    <p>Healthy Rice refers to rice plants that are thriving and free from any diseases. These
+                        plants
+                        exhibit robust growth, characterized by vibrant green leaves, strong stems, and full,
+                        plump
+                        grains. Healthy rice plants are typically grown under optimal conditions, with the right
+                        balance
+                        of sunlight, water, and nutrients. They are resistant to pests and diseases, and they
+                        yield a
+                        high-quality crop that is rich in nutritional value. Understanding what healthy rice
+                        looks like
+                        is crucial for early detection and treatment of potential diseases, ensuring a bountiful
+                        harvest.
+                    </p>
+                </article>
+            </div>
+        </section>
+        <section class="sec-blb disease-bg" id="blb">
+            <div class="s-container sd-content">
+                <div class="arrow-container">
+                    <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36"
+                        fill="none">
+                        <path
+                            d="M18 32.2846C25.9528 32.2846 32.4 25.8376 32.4 17.8846C32.4 9.93172 25.9528 3.48462 18 3.48462C10.0471 3.48462 3.59998 9.93172 3.59998 17.8846C3.59998 25.8376 10.0471 32.2846 18 32.2846Z"
+                            stroke="#F7C35F" stroke-width="3.84" stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                            d="M12.24 19.9583L16.3728 15.552C16.578 15.3239 16.829 15.1415 17.1094 15.0167C17.3896 14.8918 17.6931 14.8271 18 14.8271C18.3069 14.8271 18.6104 14.8918 18.8906 15.0167C19.171 15.1415 19.422 15.3239 19.6272 15.552L23.76 19.9583"
+                            stroke="#F7C35F" stroke-width="3.84" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <article class="disease-content">
+                    <h2>Bacterial Leaf Blight</h2>
+                    <p>Bacterial Leaf Blight (BLB), a major rice disease caused by the bacterium Xanthomonas
+                        oryzae pv.
+                        oryzae, can lead to significant yield losses. Bacterial Leaf Blight (BLB), a major rice
+                        disease
+                        caused by the bacterium Xanthomonas oryzae pv. oryzae, can lead to significant yield
+                        losses.
+                        <br> Warm, humid weather, heavy rain, and susceptible rice varieties favor its spread.
+                        <br>
+                        Planting resistant varieties, using disease-free seeds, practicing good field hygiene,
+                        and
+                        rotating crops are the most effective control methods. While chemical control can be
+                        used as a
+                        last resort, it's crucial to monitor rice fields regularly, scout for pests, and seek
+                        expert
+                        advice for optimal BLB management and yield protection.
+                    </p>
+                </article>
+            </div>
+        </section>
+        <section class="sec-bls disease-bg" id="bls">
+            <div class="s-container sd-content">
+                <div class="arrow-container">
+                    <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36"
+                        fill="none">
+                        <path
+                            d="M18 32.2846C25.9528 32.2846 32.4 25.8376 32.4 17.8846C32.4 9.93172 25.9528 3.48462 18 3.48462C10.0471 3.48462 3.59998 9.93172 3.59998 17.8846C3.59998 25.8376 10.0471 32.2846 18 32.2846Z"
+                            stroke="#F7C35F" stroke-width="3.84" stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                            d="M12.24 19.9583L16.3728 15.552C16.578 15.3239 16.829 15.1415 17.1094 15.0167C17.3896 14.8918 17.6931 14.8271 18 14.8271C18.3069 14.8271 18.6104 14.8918 18.8906 15.0167C19.171 15.1415 19.422 15.3239 19.6272 15.552L23.76 19.9583"
+                            stroke="#F7C35F" stroke-width="3.84" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <article class="disease-content">
+                    <h2>Bacterial Leaf Streak</h2>
+                    <p>Bacterial Leaf Streak (BLS), a major rice disease caused by the bacterium Xanthomonas oryzae pv.
+                        oryzicola, threatens rice crops worldwide. This disease manifests as water-soaked streaks
+                        progressing to brown, dried areas on leaves, often with browning leaf tips and characteristic
+                        wavy margins.<br>Warm, humid weather, excessive nitrogen fertilization, and susceptible rice
+                        varieties favor BLS development. <br> Effective management strategies include planting resistant
+                        rice varieties, using disease-free seeds, practicing good field hygiene, rotating crops,
+                        applying balanced fertilization, and managing water effectively. While copper-based fungicides
+                        can be used as a last resort, early detection and a combination of these control measures are
+                        key to minimizing BLS impact and protecting rice yields.
+                    </p>
+                </article>
+            </div>
+        </section>
+        <section class="sec-bakanae disease-bg" id="bakanae">
+            <div class="s-container sd-content">
+                <div class="arrow-container">
+                    <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36"
+                        fill="none">
+                        <path
+                            d="M18 32.2846C25.9528 32.2846 32.4 25.8376 32.4 17.8846C32.4 9.93172 25.9528 3.48462 18 3.48462C10.0471 3.48462 3.59998 9.93172 3.59998 17.8846C3.59998 25.8376 10.0471 32.2846 18 32.2846Z"
+                            stroke="#F7C35F" stroke-width="3.84" stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                            d="M12.24 19.9583L16.3728 15.552C16.578 15.3239 16.829 15.1415 17.1094 15.0167C17.3896 14.8918 17.6931 14.8271 18 14.8271C18.3069 14.8271 18.6104 14.8918 18.8906 15.0167C19.171 15.1415 19.422 15.3239 19.6272 15.552L23.76 19.9583"
+                            stroke="#F7C35F" stroke-width="3.84" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <article class="disease-content">
+                    <h2>Bakanae</h2>
+                    <p>Bakanae, also known as "foolish seedling" disease, caused by the fungus Fusarium fujikuroi, it
+                        disrupts the plant's hormone balance, leading to abnormal growth and significant yield losses.
+                        Infected seedlings are noticeably taller and thinner than healthy plants, often with pale green
+                        or yellowing leaves. <br> Warm, humid weather, heavy rainfall, poorly drained soil, planting
+                        infected seeds, and the presence of infected plant debris all contribute to the spread of
+                        Bakanae. <br> Seed treatment with hot water or fungicide solutions can also kill the fungus on
+                        the seed surface. Additionally, field sanitation, removing and destroying infected plant debris
+                        after harvest. Balanced fertilization, avoiding excessive nitrogen application, and proper water
+                        management with good drainage and avoiding prolonged flooding create an unfavorable environment
+                        for the fungus.
+                    </p>
+                </article>
+            </div>
+        </section>
+        <section class="sec-bs disease-bg" id="bs">
+            <div class="s-container sd-content">
+                <div class="arrow-container">
+                    <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36"
+                        fill="none">
+                        <path
+                            d="M18 32.2846C25.9528 32.2846 32.4 25.8376 32.4 17.8846C32.4 9.93172 25.9528 3.48462 18 3.48462C10.0471 3.48462 3.59998 9.93172 3.59998 17.8846C3.59998 25.8376 10.0471 32.2846 18 32.2846Z"
+                            stroke="#F7C35F" stroke-width="3.84" stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                            d="M12.24 19.9583L16.3728 15.552C16.578 15.3239 16.829 15.1415 17.1094 15.0167C17.3896 14.8918 17.6931 14.8271 18 14.8271C18.3069 14.8271 18.6104 14.8918 18.8906 15.0167C19.171 15.1415 19.422 15.3239 19.6272 15.552L23.76 19.9583"
+                            stroke="#F7C35F" stroke-width="3.84" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <article class="disease-content">
+                    <h2>Brown Spot</h2>
+                    <p>Brown Spot, caused by the fungus Helminthosporium oryzae, this versatile disease attacks leaves,
+                        sheaths, panicles, glumes, and even grains, causing significant yield reductions. Symptoms
+                        include small, brown spots on leaves that expand into circular or oval lesions with a light
+                        brown to gray center and reddish-brown margins. Dark spots on glumes, panicles, and discolored,
+                        unfilled grains further signify brown spot infection.
+                        <br>Warm temperatures, high humidity, nutrient-deficient soil, and susceptible rice varieties
+                        create favorable conditions for the fungus. <br> Effective control involves planting resistant
+                        or tolerant varieties, using certified disease-free seeds, practicing proper seed treatment, and
+                        maintaining balanced fertilization. Field sanitation, careful water management, and judicious
+                        application of fungicides.
+                    </p>
+                </article>
+            </div>
+        </section>
+        <section class="sec-gsv disease-bg" id="gsv">
+            <div class="s-container sd-content">
+                <div class="arrow-container">
+                    <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36"
+                        fill="none">
+                        <path
+                            d="M18 32.2846C25.9528 32.2846 32.4 25.8376 32.4 17.8846C32.4 9.93172 25.9528 3.48462 18 3.48462C10.0471 3.48462 3.59998 9.93172 3.59998 17.8846C3.59998 25.8376 10.0471 32.2846 18 32.2846Z"
+                            stroke="#F7C35F" stroke-width="3.84" stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                            d="M12.24 19.9583L16.3728 15.552C16.578 15.3239 16.829 15.1415 17.1094 15.0167C17.3896 14.8918 17.6931 14.8271 18 14.8271C18.3069 14.8271 18.6104 14.8918 18.8906 15.0167C19.171 15.1415 19.422 15.3239 19.6272 15.552L23.76 19.9583"
+                            stroke="#F7C35F" stroke-width="3.84" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <article class="disease-content">
+                    <h2>Rice Grassy Stunt Virus</h2>
+                    <p>Rice grassy stunt virus (RGSV) is a major viral disease affecting rice crops worldwide,
+                        transmitted by
+                        brown planthoppers (BPH). This disease poses significant threats to rice production, causing
+                        yield losses of up to 70%. Infected rice plants exhibit stunted growth with excessive tillering
+                        and an upright growth habit, giving them a "grassy" and "rosette" appearance. <br>Warm and humid
+                        weather, continuous rice cultivation throughout the year, high BPH populations, and susceptible
+                        rice varieties all favor the spread of RGSV. <br>Planting resistant rice varieties tops the list
+                        as the most effective and sustainable method. Synchronized planting across a large area at the
+                        same time helps reduce the spread of the virus by minimizing host availability for BPH.
+                        Additionally, encouraging natural enemies of BPH, such as spiders, ladybugs, and wasps, can help
+                        control the vector population. Note that insecticide applications is considered to be as a last
+                        resort.
+                    </p>
+                </article>
+            </div>
+        </section>
+        <section class="sec-nbs disease-bg" id="nbs">
+            <div class="s-container sd-content">
+                <div class="arrow-container">
+                    <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36"
+                        fill="none">
+                        <path
+                            d="M18 32.2846C25.9528 32.2846 32.4 25.8376 32.4 17.8846C32.4 9.93172 25.9528 3.48462 18 3.48462C10.0471 3.48462 3.59998 9.93172 3.59998 17.8846C3.59998 25.8376 10.0471 32.2846 18 32.2846Z"
+                            stroke="#F7C35F" stroke-width="3.84" stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                            d="M12.24 19.9583L16.3728 15.552C16.578 15.3239 16.829 15.1415 17.1094 15.0167C17.3896 14.8918 17.6931 14.8271 18 14.8271C18.3069 14.8271 18.6104 14.8918 18.8906 15.0167C19.171 15.1415 19.422 15.3239 19.6272 15.552L23.76 19.9583"
+                            stroke="#F7C35F" stroke-width="3.84" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <article class="disease-content">
+                    <h2>Narrow Brown Spot</h2>
+                    <p>Narrow brown spot (NBS), a fungal disease caused by Cercospora janseana, potentially affecting
+                        yield and grain quality. This disease manifests as narrow, brown lesions on leaves, dark spots
+                        on other plant parts, and in severe cases, premature leaf death and yield reduction. <br> Warm,
+                        humid weather, prolonged leaf wetness, excessive nitrogen fertilization, and susceptible rice
+                        varieties favor NBS development. <br>Planting resistant rice varieties, practicing balanced
+                        fertilization, reducing leaf wetness through drainage and irrigation management, implementing
+                        field sanitation, and applying fungicides as a last resort are the key strategies for effective
+                        NBS control. Regular field monitoring, early detection, and timely implementation of these
+                        measures are crucial for minimizing yield losses and protecting rice crops from the damaging
+                        impacts of NBS.
+                    </p>
+                </article>
+            </div>
+        </section>
+        <section class="sec-rsv disease-bg" id="rsv">
+            <div class="s-container sd-content">
+                <div class="arrow-container">
+                    <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36"
+                        fill="none">
+                        <path
+                            d="M18 32.2846C25.9528 32.2846 32.4 25.8376 32.4 17.8846C32.4 9.93172 25.9528 3.48462 18 3.48462C10.0471 3.48462 3.59998 9.93172 3.59998 17.8846C3.59998 25.8376 10.0471 32.2846 18 32.2846Z"
+                            stroke="#F7C35F" stroke-width="3.84" stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                            d="M12.24 19.9583L16.3728 15.552C16.578 15.3239 16.829 15.1415 17.1094 15.0167C17.3896 14.8918 17.6931 14.8271 18 14.8271C18.3069 14.8271 18.6104 14.8918 18.8906 15.0167C19.171 15.1415 19.422 15.3239 19.6272 15.552L23.76 19.9583"
+                            stroke="#F7C35F" stroke-width="3.84" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <article class="disease-content">
+                    <h2>Ragged Stunt Virus</h2>
+                    <p>Ragged stunt virus (RRSV), transmitted by brown planthoppers, its impact manifests as short,
+                        ragged, or twisted leaves, stunted growth, excessive tillering, delayed leaf development,
+                        discoloration, and green color retention even after nitrogen application <br>Warm and humid
+                        climates, continuous rice cultivation, high brown planthopper populations, and susceptible rice
+                        varieties favor RRSV spread. <br>Planting resistant rice varieties is the primary control
+                        method, supplemented by synchronized planting, biological control, field sanitation, water
+                        management, and, as a last resort, targeted insecticide application. Effective management
+                        requires regular field monitoring, early detection, and an integrated approach combining various
+                        strategies.
+                    </p>
+                </article>
+            </div>
+        </section>
+        <section class="sec-rb disease-bg" id="rb">
+            <div class="s-container sd-content">
+                <div class="arrow-container">
+                    <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36"
+                        fill="none">
+                        <path
+                            d="M18 32.2846C25.9528 32.2846 32.4 25.8376 32.4 17.8846C32.4 9.93172 25.9528 3.48462 18 3.48462C10.0471 3.48462 3.59998 9.93172 3.59998 17.8846C3.59998 25.8376 10.0471 32.2846 18 32.2846Z"
+                            stroke="#F7C35F" stroke-width="3.84" stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                            d="M12.24 19.9583L16.3728 15.552C16.578 15.3239 16.829 15.1415 17.1094 15.0167C17.3896 14.8918 17.6931 14.8271 18 14.8271C18.3069 14.8271 18.6104 14.8918 18.8906 15.0167C19.171 15.1415 19.422 15.3239 19.6272 15.552L23.76 19.9583"
+                            stroke="#F7C35F" stroke-width="3.84" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <article class="disease-content">
+                    <h2>Rice Blast</h2>
+                    <p>Rice blast, caused by the fungus Magnaporthe oryzae, this destructive disease manifests as
+                        elliptical lesions on leaves, blackened nodes causing "neck rot," white lesions on glumes and
+                        spikelets impacting grain quality, and stunted growth. <br> Warm and humid weather, high
+                        humidity, frequent rainfall, excessive nitrogen fertilization, and susceptible rice varieties
+                        favor its spread. <br>To combat rice blast, planting resistant rice varieties is the most
+                        effective and sustainable long-term strategy, supplemented by balanced fertilization, seed
+                        treatment, field sanitation, proper water management, and judicious use of foliar fungicides
+                        when necessary. Regular field monitoring, an integrated control approach combining various
+                        techniques, and staying informed about the latest research are crucial for effective management
+                        and minimizing the devastating impacts of rice blast on rice production and global food
+                        security.
+                    </p>
+                </article>
+            </div>
+        </section>
+        <section class="sec-rfs disease-bg" id="rfs">
+            <div class="s-container sd-content">
+                <div class="arrow-container">
+                    <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36"
+                        fill="none">
+                        <path
+                            d="M18 32.2846C25.9528 32.2846 32.4 25.8376 32.4 17.8846C32.4 9.93172 25.9528 3.48462 18 3.48462C10.0471 3.48462 3.59998 9.93172 3.59998 17.8846C3.59998 25.8376 10.0471 32.2846 18 32.2846Z"
+                            stroke="#F7C35F" stroke-width="3.84" stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                            d="M12.24 19.9583L16.3728 15.552C16.578 15.3239 16.829 15.1415 17.1094 15.0167C17.3896 14.8918 17.6931 14.8271 18 14.8271C18.3069 14.8271 18.6104 14.8918 18.8906 15.0167C19.171 15.1415 19.422 15.3239 19.6272 15.552L23.76 19.9583"
+                            stroke="#F7C35F" stroke-width="3.84" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <article class="disease-content">
+                    <h2>Rice False Smut</h2>
+                    <p>Rice false smut, caused by the fungus Ustilaginoidea virens, this disease manifests as individual
+                        rice grains transformed into velvety, black smut balls. Initially orange, these balls mature to
+                        a greenish-black color and burst, releasing spores that spread the disease. Affected grains
+                        suffer from reduced weight, chalkiness, and decreased germination rates. <br> Warm and humid
+                        conditions, frequent rainfall, dense canopies, excessive nitrogen fertilization, and susceptible
+                        rice varieties favor false smut development. <br> Planting resistant rice varieties remains the
+                        most effective and long-term solution. Additionally, balanced fertilization, early planting,
+                        field sanitation, and judicious use of foliar fungicides can contribute to controlling the
+                        disease. Implementing cultural practices like adjusting row spacing and managing irrigation can
+                        further create an unfavorable environment for the fungus.
+                    </p>
+                </article>
+            </div>
+        </section>
+        <section class="sec-sb disease-bg" id="sb">
+            <div class="s-container sd-content">
+                <div class="arrow-container">
+                    <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36"
+                        fill="none">
+                        <path
+                            d="M18 32.2846C25.9528 32.2846 32.4 25.8376 32.4 17.8846C32.4 9.93172 25.9528 3.48462 18 3.48462C10.0471 3.48462 3.59998 9.93172 3.59998 17.8846C3.59998 25.8376 10.0471 32.2846 18 32.2846Z"
+                            stroke="#F7C35F" stroke-width="3.84" stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                            d="M12.24 19.9583L16.3728 15.552C16.578 15.3239 16.829 15.1415 17.1094 15.0167C17.3896 14.8918 17.6931 14.8271 18 14.8271C18.3069 14.8271 18.6104 14.8918 18.8906 15.0167C19.171 15.1415 19.422 15.3239 19.6272 15.552L23.76 19.9583"
+                            stroke="#F7C35F" stroke-width="3.84" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <article class="disease-content">
+                    <h2>Sheath Blight</h2>
+                    <p>Sheath blight, caused by the fungus Rhizoctonia solani, this disease manifests as elongated,
+                        water-soaked lesions on the lower leaf sheaths, progressing upwards and turning brown and
+                        necrotic. Under humid conditions, grayish-white fungal growth becomes visible on the lesions.
+                        Affected plants suffer from premature leaf drying, reduced photosynthetic area, stunted growth
+                        and more. <br>Warm temperatures, high humidity, prolonged leaf wetness, dense canopies,
+                        excessive nitrogen fertilization, stressed plants, and susceptible rice varieties favor sheath
+                        blight development. <br>Planting resistant rice varieties remains the most effective long-term
+                        solution. Combining this with balanced fertilization, field sanitation, crop rotation, proper
+                        water management, judicious use of foliar fungicides, and exploring biological control options
+                        offers a multifaceted approach to combating sheath blight.
+                    </p>
+                </article>
+            </div>
+        </section>
+        <section class="sec-sr disease-bg" id="sr">
+            <div class="s-container sd-content">
+                <div class="arrow-container">
+                    <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36"
+                        fill="none">
+                        <path
+                            d="M18 32.2846C25.9528 32.2846 32.4 25.8376 32.4 17.8846C32.4 9.93172 25.9528 3.48462 18 3.48462C10.0471 3.48462 3.59998 9.93172 3.59998 17.8846C3.59998 25.8376 10.0471 32.2846 18 32.2846Z"
+                            stroke="#F7C35F" stroke-width="3.84" stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                            d="M12.24 19.9583L16.3728 15.552C16.578 15.3239 16.829 15.1415 17.1094 15.0167C17.3896 14.8918 17.6931 14.8271 18 14.8271C18.3069 14.8271 18.6104 14.8918 18.8906 15.0167C19.171 15.1415 19.422 15.3239 19.6272 15.552L23.76 19.9583"
+                            stroke="#F7C35F" stroke-width="3.84" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <article class="disease-content">
+                    <h2>Sheath Rot</h2>
+                    <p>Sheath rot, caused by the fungus Sarocladium oryzae, this disease manifests as rotting of the
+                        uppermost leaf sheaths enclosing young panicles, displaying yellowish-brown lesions and
+                        potentially restricting or blocking panicle emergence. <br>Warm and humid weather, high
+                        humidity, frequent rainfall, dense canopies, insect damage, plant stress, and susceptible rice
+                        varieties all favor sheath rot development. <br> Planting resistant rice varieties is the most
+                        effective long-term solution, supplemented by balanced fertilization, field sanitation, insect
+                        control, proper water management, and judicious application of foliar fungicides and seed
+                        treatment. Effective sheath rot management requires regular field monitoring, early detection,
+                        and an integrated control approach combining various techniques to protect rice crops, ensuring
+                        sustainable rice production, and safeguarding future generations.
+                    </p>
+                </article>
+            </div>
+        </section>
+        <section class="sec-str disease-bg" id="str">
+            <div class="s-container sd-content">
+                <div class="arrow-container">
+                    <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36"
+                        fill="none">
+                        <path
+                            d="M18 32.2846C25.9528 32.2846 32.4 25.8376 32.4 17.8846C32.4 9.93172 25.9528 3.48462 18 3.48462C10.0471 3.48462 3.59998 9.93172 3.59998 17.8846C3.59998 25.8376 10.0471 32.2846 18 32.2846Z"
+                            stroke="#F7C35F" stroke-width="3.84" stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                            d="M12.24 19.9583L16.3728 15.552C16.578 15.3239 16.829 15.1415 17.1094 15.0167C17.3896 14.8918 17.6931 14.8271 18 14.8271C18.3069 14.8271 18.6104 14.8918 18.8906 15.0167C19.171 15.1415 19.422 15.3239 19.6272 15.552L23.76 19.9583"
+                            stroke="#F7C35F" stroke-width="3.84" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <article class="disease-content">
+                    <h2>Stem Rot</h2>
+                    <p>Steam rot, caused by the fungus Sclerotium oryzae, this soil-borne disease manifests as small
+                        black lesions on the lower leaf sheaths near the water line, progressing to inward rot of the
+                        stem, leading to lodging and ultimately, empty or partially filled panicles, significantly
+                        impacting yield. <br>Warm and humid conditions, prolonged flooding, dense canopies, stressed
+                        plants, monoculture rice cultivation, and susceptible rice varieties favor steam rot
+                        development. <br>Planting resistant rice varieties is the primary long-term solution,
+                        supplemented by crop rotation, balanced fertilization, field sanitation, improved drainage, and
+                        exploring biological control methods. Effective management requires regular field monitoring,
+                        early detection, and an integrated approach combining various techniques.
+                    </p>
+                </article>
+            </div>
+        </section>
+        <section class="sec-tv disease-bg" id="tv">
+            <div class="s-container sd-content">
+                <div class="arrow-container">
+                    <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36"
+                        fill="none">
+                        <path
+                            d="M18 32.2846C25.9528 32.2846 32.4 25.8376 32.4 17.8846C32.4 9.93172 25.9528 3.48462 18 3.48462C10.0471 3.48462 3.59998 9.93172 3.59998 17.8846C3.59998 25.8376 10.0471 32.2846 18 32.2846Z"
+                            stroke="#F7C35F" stroke-width="3.84" stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                            d="M12.24 19.9583L16.3728 15.552C16.578 15.3239 16.829 15.1415 17.1094 15.0167C17.3896 14.8918 17.6931 14.8271 18 14.8271C18.3069 14.8271 18.6104 14.8918 18.8906 15.0167C19.171 15.1415 19.422 15.3239 19.6272 15.552L23.76 19.9583"
+                            stroke="#F7C35F" stroke-width="3.84" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <article class="disease-content">
+                    <h2>Tungro Virus</h2>
+                    <p>Tungro virus, a complex transmitted by leafhoppers, it manifests as stunted growth, reduced
+                        tillering, yellowing or orange leaves, uneven plant growth, distorted leaves, leaf mottling and
+                        streaking, sterile panicles, partially filled grains, and dark brown grain blotches. <br> Warm
+                        and humid conditions, continuous rice cultivation, high leafhopper populations, and susceptible
+                        rice varieties favor tungro virus spread. <br>Planting resistant rice varieties is the most
+                        effective long-term solution, supplemented by synchronized planting, encouraging natural
+                        enemies, field sanitation, proper water management, and judicious insecticide application as a
+                        last resort.
+                    </p>
+                </article>
+            </div>
+        </section>
+        <section class="sec-nr disease-bg" id="nr">
+            <div class="s-container sd-content">
+                <div class="arrow-container">
+                    <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36"
+                        fill="none">
+                        <path
+                            d="M18 32.2846C25.9528 32.2846 32.4 25.8376 32.4 17.8846C32.4 9.93172 25.9528 3.48462 18 3.48462C10.0471 3.48462 3.59998 9.93172 3.59998 17.8846C3.59998 25.8376 10.0471 32.2846 18 32.2846Z"
+                            stroke="#F7C35F" stroke-width="3.84" stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                            d="M12.24 19.9583L16.3728 15.552C16.578 15.3239 16.829 15.1415 17.1094 15.0167C17.3896 14.8918 17.6931 14.8271 18 14.8271C18.3069 14.8271 18.6104 14.8918 18.8906 15.0167C19.171 15.1415 19.422 15.3239 19.6272 15.552L23.76 19.9583"
+                            stroke="#F7C35F" stroke-width="3.84" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <article class="disease-content">
+                    <h2>Not Rice</h2>
+                    <p>The “Not Rice” category is a unique feature of Dr.Rice. This class was trained and tested on a
+                        total of 350 images sourced from the Microsoft Common Objects in Context dataset. This means
+                        that while Dr.Rice is designed to analyze rice leaves, it has the capability to process images
+                        of non-rice objects as well. However, it's important to note that the system may not always
+                        correctly identify non-rice objects. <br>Moreover, while Dr.Rice boasts a high accuracy rate,
+                        it's not infallible. There may be instances where it diagnoses incorrect diseases, even on
+                        non-rice (unseen) objects. We continually strive to improve our system, but we appreciate your
+                        understanding that no system is perfect. We recommend always consulting with a professional for
+                        a definitive diagnosis. With Dr.Rice, we're here to assist you in maintaining the health of your
+                        rice crops, one leaf at a time!
+                    </p>
+                </article>
+            </div>
+        </section>
+    </section>
+    <section class="sec-team" id="team">
+        <div class="container-sec-team">
+            <h2 class="section-title hidden" style="--order: 1;"><img class="st-left"
+                    src="/static/svg/multi-triangle-fleft-team.svg" alt="🔺">Team<img class="st-right"
+                    src="/static/svg/multi-triangle-fright-team.svg" alt="🔺"></h2>
+            <ul class="team-container">
+                <li class="image-items hidden" style="--order: 2;">
+                    <img src="/static/images/emjay.JPG" alt="Picture of Melvyn John Paleguin" width="120">
+                    <div class="team-text-container">
+                        <h3 class="team-members-name">Melvyn John Paleguin</h3>
+                        <p class="team-title">Fullstack Developer</p>
+                    </div>
+                </li>
+                <li class="image-items hidden" style="--order: 3;">
+                    <img src="/static/images/rinee-id.jpg" alt="Picture of Rinee Frances Obafial" width="120">
+                    <div class="team-text-container">
+                        <h3 class="team-members-name">Rinee Frances Obafial</h3>
+                        <p class="team-title">Document Analyst</p>
+                    </div>
+                </li>
+                <li class="image-items hidden" style="--order: 4;">
+                    <img src="/static/images/lloyd.jpg" alt="Picture of John Lloyd Cerojales" width="120">
+                    <div class="team-text-container">
+                        <h3 class="team-members-name">John Lloyd Cerojales</h3>
+                        <p class="team-title">UI Designer</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <footer>
+        <div class="s-container">
+            <span class="socials">
+                <img src="/static/svg/facebook.svg" alt="fb">
+                <img src="/static/svg/mdi_twitter.svg" alt="x">
+                <img src="/static/svg/ph_pinterest-logo-bold.svg" alt="p">
+                <img src="/static/svg/mdi_linkedin.svg" alt="in">
+            </span>
+            <span class="footer-text">
+                WE NEED BUDGET, WE NEED MONEY, SEND HELP
+            </span>
+        </div>
+    </footer>
+</body>
+
+</html>
